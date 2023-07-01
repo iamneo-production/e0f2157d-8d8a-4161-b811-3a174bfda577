@@ -1,6 +1,7 @@
 package com.examly.springapp.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -34,6 +35,22 @@ public class BookingService {
             String errorMessage = "Booking not found";
             System.out.println(errorMessage); 
             return ResponseEntity.notFound().build();
+        }
+    }
+    public Booking updateBooking(int booking_id, Booking booking){
+        Optional<Booking> bookingOptional = bookingRepo.findById(booking_id);
+        if(bookingOptional.isPresent()){
+            Booking existingBooking = bookingOptional.get();
+            existingBooking.setCustomer(booking.getCustomer());
+            existingBooking.setCheckInDate(booking.getCheckInDate());
+            existingBooking.setCheckOutDate(booking.getCheckOutDate());
+            existingBooking.setRoom(booking.getRoom());
+            existingBooking.setPayment(booking.getPayment());
+            existingBooking.setCancellation(booking.getCancellation());
+            return bookingRepo.save(existingBooking);
+        }
+        else{
+            return booking;
         }
     }
 
