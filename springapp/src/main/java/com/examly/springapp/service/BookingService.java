@@ -9,12 +9,15 @@ import org.springframework.http.ResponseEntity;
 import com.examly.springapp.model.Booking;
 import com.examly.springapp.model.Payment;
 import com.examly.springapp.repository.BookingRepo;
+import com.examly.springapp.service.PaymentService;
+
 
 @Service
 public class BookingService {
     @Autowired
     private BookingRepo bookingRepo;
-
+    @Autowired
+    private PaymentService paymentService;
     public Booking addBooking(Booking booking) {
 
         return bookingRepo.save(booking);
@@ -55,8 +58,18 @@ public class BookingService {
         }
     }
 
-    public Booking getBookingById(int bookingId) {
-        return bookingRepo.findById(bookingId).orElse(null);
+    public Payment addPaymentToBooking(int bookingId, Payment payment) {
+        Optional<Booking> optionalBooking = bookingRepo.findById(bookingId);
+        if (optionalBooking.isPresent()) {
+            Booking booking = optionalBooking.get();
+            payment.setBooking(booking);
+            Payment addedPayment = paymentService.addPayment(payment);
+            booking.getPayment().add(addedPayment);
+            bookingRepo.save(booking);
+            return addedPayment;
+        } else {
+            throw new IllegalArgumentException("Booking not found");
+        }
     }
     
 }
