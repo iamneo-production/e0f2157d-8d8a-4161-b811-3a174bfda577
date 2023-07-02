@@ -46,12 +46,12 @@ public class BookingController {
         return this.bookingService.updateBooking(booking_id, updatedBooking);
     }
     @PostMapping("bookings/{bookingId}/payments")
-    public ResponseEntity<Payment> addPaymentToBooking(
+    public ResponseEntity<Boolean> addPaymentToBooking(
             @PathVariable("bookingId") int bookingId,
             @RequestBody Payment payment) {
         try {
-            Payment addedPayment = bookingService.addPaymentToBooking(bookingId, payment);
-            return ResponseEntity.ok(addedPayment);
+            boolean isPaymentAdded = bookingService.addPaymentToBooking(bookingId, payment);
+            return ResponseEntity.ok(isPaymentAdded);
         } catch (IllegalArgumentException e) {
             return ResponseEntity.notFound().build();
         }

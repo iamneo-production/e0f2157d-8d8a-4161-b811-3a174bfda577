@@ -58,7 +58,7 @@ public class BookingService {
         }
     }
 
-    public Payment addPaymentToBooking(int bookingId, Payment payment) {
+    public boolean addPaymentToBooking(int bookingId, Payment payment) {
         Optional<Booking> optionalBooking = bookingRepo.findById(bookingId);
         if (optionalBooking.isPresent()) {
             Booking booking = optionalBooking.get();
@@ -66,9 +66,9 @@ public class BookingService {
             Payment addedPayment = paymentService.addPayment(payment);
             booking.getPayment().add(addedPayment);
             bookingRepo.save(booking);
-            return addedPayment;
+            return true;
         } else {
-            throw new IllegalArgumentException("Booking not found");
+            return false;
         }
     }
     
