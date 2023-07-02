@@ -54,16 +54,9 @@ public class BookingService {
             return booking;
         }
     }
-    public Booking addPaymentToBooking(int bookingId, Payment payment) {
-        Optional<Booking> bookingOptional = bookingRepo.findById(bookingId);
-        if (bookingOptional.isPresent()) {
-            Booking booking = bookingOptional.get();
-            List<Payment> payments = booking.getPayment();
-            payments.add(payment);
-            booking.setPayment(payments);
-            return bookingRepo.save(booking);
-        } else {
-            return null;
-        }
+
+    public Booking getBookingById(int bookingId) {
+        return bookingRepo.findById(bookingId).orElse(null);
     }
+    
 }
