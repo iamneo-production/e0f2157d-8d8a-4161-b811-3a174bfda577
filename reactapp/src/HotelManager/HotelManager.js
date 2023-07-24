@@ -10,6 +10,7 @@ const HotelManager = () => {
     fetchBookings();
   }, []);
 
+  
   const fetchBookings = async () => {
     try {
       const response = await getAllBookings()
