@@ -24,6 +24,7 @@ import HotelManager from "./HotelManager/HotelManager";
 import BookingForm from "./pages/BookingForm";
 import Signup from "./pages/Signup";
 import Login from "./pages/Login";
+import Payment from "./pages/payment/Payment";
 
 import Layout from "./components/Layout";
 
@@ -58,7 +59,7 @@ function App() {
 
             <Route exact path="/hotelmanager" element={<Layout><HotelManager /></Layout>} />
             <Route path="/bookroom" element={<Layout><BookingForm /></Layout>} />
-           
+            <Route path="/payment" element={<Layout><Payment /></Layout>} />
           </Routes>
         </AuthProvider>
       </Router>
