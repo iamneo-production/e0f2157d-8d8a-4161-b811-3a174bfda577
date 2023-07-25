@@ -22,6 +22,8 @@ import EditRoom from "./Admin/AddRoom/EditRoom";
 import ViewRoom from "./Admin/AddRoom/ViewRoom";
 import HotelManager from "./HotelManager/HotelManager";
 import BookingForm from "./pages/BookingForm";
+import Signup from "./pages/Signup";
+import Login from "./pages/Login";
 
 
 
@@ -33,7 +35,8 @@ function App() {
       <Router>
         <AuthProvider >
           <Routes>
-           
+          <Route path="/signup" element={<Signup />} />
+            <Route path="/login" element={<Login />} />
             <Route path="/" element={<Welcome />} />
             <Route path="/home" element={<Layout><Home /></Layout>} />
 
