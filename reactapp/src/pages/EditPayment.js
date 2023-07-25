@@ -39,7 +39,7 @@ export default function EditPayment() {
         <div className="container">
             <div className="row">
                 <div className="col-md-6 offset-md-3 border rounded p-4 mt-2 shadow">
-                    <h2 className="text-center m-4">Edit Room Details</h2>
+                    <h2 className="text-center m-4">Edit Payment Details</h2>
                     <form onSubmit={onSubmit}>
 
 
@@ -102,7 +102,7 @@ export default function EditPayment() {
                         <button type="submit" className="btn btn-outline-success">
                             Submit
                         </button>
-                        <Link className="btn btn-outline-danger mx-2" to="/all-rooms">
+                        <Link className="btn btn-outline-danger mx-2" to="/all-payments">
                             Cancel
                         </Link>
                     </form>

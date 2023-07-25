@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const BASE_URL = "http://localhost:8081"; // Replace with your actual backend API URL
+const BASE_URL = "https://8080-abafebdafeeaffecacabeacbecdaeaeaadbdbabf.project.examly.io"; // Replace with your actual backend API URL
 
 const getToken = () => {
     return localStorage.getItem("token");
