@@ -25,6 +25,8 @@ import BookingForm from "./pages/BookingForm";
 import Signup from "./pages/Signup";
 import Login from "./pages/Login";
 
+import Layout from "./components/Layout";
+
 
 
 function App() {
