@@ -6,16 +6,16 @@ import RazorpayButton from './RazorPayButton';
 import './payment.css';
 import { Link, useLocation } from 'react-router-dom';
 import { AuthContext } from '../../context/AuthContext';
-
+import BookingConfirmation from '../BookingConfirmation';
 
 const Payment = () => {
     const location = useLocation()
     const { roomAmount, idRoom, bookingData } = location.state
-    const [email, setEmail] = useState('');
-    const [phoneNumber, setPhoneNumber] = useState('');
+    const { user } = useContext(AuthContext)
+    const [email, setEmail] = useState(user.email);
+    const [phoneNumber, setPhoneNumber] = useState(user.phone);
     const [hotelId, setHotelId] = useState(idRoom.id);
     const [amount, setAmount] = useState(roomAmount);
-    const { user } = useContext(AuthContext)
 
     const handleInputChange = (e) => {
         const { name, value } = e.target;
@@ -59,7 +59,7 @@ const Payment = () => {
                     type="email"
                     id="email"
                     name="email"
-                    value={user.email}
+                    value={email}
                     onChange={handleInputChange}
                     placeholder="Email"
                 />
@@ -68,7 +68,7 @@ const Payment = () => {
                     type="tel"
                     id="phoneNumber"
                     name="phoneNumber"
-                    value={user.phone}
+                    value={phoneNumber}
                     onChange={handleInputChange}
                     placeholder="Phone Number"
                 />
@@ -97,16 +97,18 @@ const Payment = () => {
                 <p>Payment Amount: {amount} INR</p>
             </div>
             <RazorpayButton
-                amount={amount * 100} // Convert amount to paise
-                currency="INR" // Replace with the actual currency code
+                amount={amount} 
+                currency="INR" 
                 email={email}
                 phoneNumber={phoneNumber}
                 hotelId={hotelId}
                 onSuccess={handlePaymentSuccess}
                 onFailure={handlePaymentFailure}
+
             />
 
             <button><Link to="/home">Go back</Link></button>
+            <button><Link to={"/all-payments"}>All Payments</Link></button>
         </div>
     );
 };
