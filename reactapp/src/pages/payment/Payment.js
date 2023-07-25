@@ -6,7 +6,7 @@ import RazorpayButton from './RazorPayButton';
 import './payment.css';
 import { Link, useLocation } from 'react-router-dom';
 import { AuthContext } from '../../context/AuthContext';
-import BookingConfirmation from '../BookingConfirmation';
+
 
 const Payment = () => {
     const location = useLocation()
