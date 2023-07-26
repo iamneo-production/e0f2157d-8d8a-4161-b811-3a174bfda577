@@ -1,21 +1,19 @@
-
-
 import React, { useState, useContext } from 'react';
-
 import RazorpayButton from './RazorPayButton';
 import './payment.css';
 import { Link, useLocation } from 'react-router-dom';
 import { AuthContext } from '../../context/AuthContext';
 
-
 const Payment = () => {
-    const location = useLocation()
-    const { roomAmount, idRoom, bookingData } = location.state
-    const { user } = useContext(AuthContext)
+    const location = useLocation();
+    const { roomAmount, idRoom, bookingData } = location.state;
+    const { user } = useContext(AuthContext);
     const [email, setEmail] = useState(user.email);
     const [phoneNumber, setPhoneNumber] = useState(user.phone);
     const [hotelId, setHotelId] = useState(idRoom.id);
-    const [amount, setAmount] = useState(roomAmount);
+    const [amount, setAmount] = useState(roomAmount); 
+    const [originalAmount, setOriginalAmount] = useState(roomAmount); 
+     
 
     const handleInputChange = (e) => {
         const { name, value } = e.target;
@@ -32,7 +30,6 @@ const Payment = () => {
                 break;
             case 'amount':
                 setAmount(value);
-                break;
             default:
                 break;
         }
@@ -40,14 +37,21 @@ const Payment = () => {
 
     const handlePaymentSuccess = (payment) => {
         console.log("Payment successful:", payment);
-
-
-
+        // Handle success action here
     };
 
     const handlePaymentFailure = (error) => {
         console.log('Payment failed:', error);
+        // Handle failure action here
+    };
 
+    // Function to handle the server-side payment
+    const handlePaymentOnServer = async (amount) => {
+        // Here you can make the API call to your server to handle the payment amount
+        console.log("Sending to server: ",amount);
+        // Example API call:
+        // const response = await apiCallToServer({ amount });
+        // console.log(response);
     };
 
     return (
@@ -97,14 +101,15 @@ const Payment = () => {
                 <p>Payment Amount: {amount} INR</p>
             </div>
             <RazorpayButton
-                amount={amount} 
-                currency="INR" 
+                amount={amount * 100} 
+                currency="INR"
                 email={email}
                 phoneNumber={phoneNumber}
                 hotelId={hotelId}
                 onSuccess={handlePaymentSuccess}
                 onFailure={handlePaymentFailure}
-
+                onServerPayment={handlePaymentOnServer} 
+                originalAmount = {originalAmount}
             />
 
             <button><Link to="/home">Go back</Link></button>
