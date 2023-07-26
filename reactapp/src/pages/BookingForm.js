@@ -46,7 +46,7 @@ const BookingForm = () => {
         e.preventDefault();
 
         try {
-            // Make a POST request to the backend to book the room
+            // Make request to the backend to book the room
             const response = await addBooking(bookingData);
 
             // Check if the booking was successful
@@ -110,7 +110,7 @@ const BookingForm = () => {
                     <Input
                         type="number"
                         value={bookingData.totalDay}
-                        readOnly // Make the input field read-only
+                        readOnly 
                     />
                 </FormControl>
                 <FormControl id="totalAmount" mb={4} isRequired>
@@ -118,7 +118,7 @@ const BookingForm = () => {
                     <Input
                         type="number"
                         value={bookingData.totalAmount}
-                        readOnly // Make the input field read-only
+                        readOnly 
                     />
                 </FormControl>
                 <Button type="submit" colorScheme="blue">
