@@ -14,13 +14,13 @@ const RazorpayButton = (props) => {
     const handleClick = async () => {
         const { amount, currency, onSuccess, onFailure, email, hotelId, phoneNumber } = props;
         if (scriptLoaded) {
-            const options = createOptions(amount, currency);
+            const options = createOptions(amount * 100, currency);
             const rzp = new window.Razorpay(options);
             rzp.on('payment.success', onSuccess);
             rzp.on('payment.error', onFailure);
             rzp.open();
         }
-        const response = await addPayment({ email, phoneNumber, hotelId, amount })
+        const response = await addPayment({ email, phoneNumber, hotelId, amount : amount * 100})
         console.log(response)
     };
 

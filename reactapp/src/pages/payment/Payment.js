@@ -15,7 +15,8 @@ const Payment = () => {
     const [email, setEmail] = useState(user.email);
     const [phoneNumber, setPhoneNumber] = useState(user.phone);
     const [hotelId, setHotelId] = useState(idRoom.id);
-    const [amount, setAmount] = useState(roomAmount);
+    const [amount, setAmount] = useState(roomAmount / 100);
+
 
     const handleInputChange = (e) => {
         const { name, value } = e.target;
@@ -31,7 +32,7 @@ const Payment = () => {
                 setHotelId(value);
                 break;
             case 'amount':
-                setAmount(value);
+                setAmount(value/100);
                 break;
             default:
                 break;
@@ -97,7 +98,7 @@ const Payment = () => {
                 <p>Payment Amount: {amount} INR</p>
             </div>
             <RazorpayButton
-                amount={amount} 
+                amount={amount * 100} 
                 currency="INR" 
                 email={email}
                 phoneNumber={phoneNumber}

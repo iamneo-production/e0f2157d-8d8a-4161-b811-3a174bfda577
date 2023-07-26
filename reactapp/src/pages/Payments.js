@@ -5,7 +5,7 @@ import { Box, Button, Flex, VStack } from '@chakra-ui/react';
 
 function Payments() {
     const [payments, setPayments] = useState([]);
-
+    
     useEffect(() => {
         loadPayments();
     }, []);
