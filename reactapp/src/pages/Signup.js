@@ -30,7 +30,6 @@ const Signup = () => {
         try {
             await handleSignUp(formData);
             setLoading(false);
-            // Redirect to the home page after successful login
             navigate("/login");
         } catch (error) {
             console.error("Registration failed!", error);

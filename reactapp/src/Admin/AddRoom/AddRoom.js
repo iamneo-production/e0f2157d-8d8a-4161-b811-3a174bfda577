@@ -89,12 +89,12 @@ export default function AddRoom() {
                 name="roomType"
                 value={roomType}
                 onChange={(e) => onInputChange(e)}>
-                <option value='' selected disabled>Room Type</option>
-                <option>Single Room</option>
-                <option>Double Room</option>
-                <option>Deluxe Room</option>
-                <option>Twin Room</option>
-                <option>Suite Room</option>
+                <option value="" disabled>Room Type</option>
+                <option value="Single Room">Single Room</option>
+                <option value="Double Room">Double Room</option>
+                <option value="Deluxe Room">Deluxe Room</option>
+                <option value="Twin Room">Twin Room</option>
+                <option value="Suite Room">Suite Room</option>
               </select>
             </div>
             <div className="mb-3">
