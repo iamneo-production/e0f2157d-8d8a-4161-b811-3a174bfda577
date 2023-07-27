@@ -9,7 +9,6 @@ const Layout = ({ children }) => {
 
     const handleLogoutClick = () => {
         handleLogout();
-        // Redirect to the login page after logout
         navigate('/');
     };
 

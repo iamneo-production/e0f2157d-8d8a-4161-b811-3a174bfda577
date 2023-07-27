@@ -87,22 +87,22 @@ public class UserServiceImpl implements UserDetailsService, UserService {
 
     @Override
     public User getUserByUsername(String email) {
-        // Retrieve the user from the database based on the username
+       
         User userEntity = userDao.findByEmail(email);
 
-        // Check if the user with the provided username exists
+        
         if (userEntity == null) {
             throw new UsernameNotFoundException("User not found");
         }
 
-        // Create a User object to hold the relevant user details
+        
         User user = new User();
         user.setName(userEntity.getName());
         user.setEmail(userEntity.getEmail());
         user.setUsername(userEntity.getUsername());
         user.setPhone(userEntity.getPhone());
 
-        // Return the User object with the relevant details
+        
         return user;
     }
 
