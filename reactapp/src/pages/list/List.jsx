@@ -32,13 +32,13 @@ const List = () => {
 
   useEffect(() => {
     fetchRooms();
-  }, []); // Fetch rooms on initial render
+  }, []); 
 
   const handleDelete = async (roomId) => {
     try {
       if (user.isAdmin) {
         await deleteRoom(roomId);
-        // If the deletion is successful, re-fetch the rooms to update the list
+      
         fetchRooms();
       } else {
         console.log("You are not authorized to delete rooms.");
@@ -99,8 +99,6 @@ const List = () => {
               <Button
                 colorScheme="blue"
                 onClick={() => handleBookNow(room.id)}
-                // Change the button text based on the booking status of the room
-                // If isBooked[room.id] is true, display "Booked Now", otherwise "Book Now"
               >
                 {isBooked[room.id] ? "Booked" : "Book Now"}
               </Button>
