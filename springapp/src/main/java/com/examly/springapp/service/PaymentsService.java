@@ -3,35 +3,35 @@ package com.examly.springapp.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.examly.springapp.model.Payment;
-import com.examly.springapp.repository.PaymentRepository;
+import com.examly.springapp.model.Payments;
+import com.examly.springapp.repository.PaymentsRepository;
 
 import java.util.List;
 import java.util.Optional;
 
 @Service
 
-public class PaymentService {
-    private final PaymentRepository paymentRepository;
+public class PaymentsService {
+    private final PaymentsRepository paymentRepository;
 
     @Autowired
-    public PaymentService(PaymentRepository paymentRepository) {
+    public PaymentsService(PaymentsRepository paymentRepository) {
         this.paymentRepository = paymentRepository;
     }
 
-    public Payment createPayment(Payment payment) {
+    public Payments createPayment(Payments payment) {
         return paymentRepository.save(payment);
     }
 
-    public Optional<Payment> getPaymentById(int paymentId) {
+    public Optional<Payments> getPaymentById(int paymentId) {
         return paymentRepository.findById(paymentId);
     }
 
-    public List<Payment> getAllPayments() {
+    public List<Payments> getAllPayments() {
         return paymentRepository.findAll();
     }
 
-    public Payment updatePayment(Payment payment) {
+    public Payments updatePayment(Payments payment) {
         return paymentRepository.save(payment);
     }
 
