@@ -5,7 +5,7 @@ import { getSinglePayment } from "../service/paymentService";
 export default function ViewPayment() {
     const [payment, setPayment] = useState(null);
 
-    const { id } = useParams(); // Extract the id from URL params
+    const { id } = useParams();
 
     useEffect(() => {
         loadPayment();
@@ -13,7 +13,7 @@ export default function ViewPayment() {
 
     const loadPayment = async () => {
         try {
-            const result = await getSinglePayment(id); // Pass the id to the getSinglePayment function
+            const result = await getSinglePayment(id); 
             setPayment(result);
             console.log(result);
         } catch (error) {

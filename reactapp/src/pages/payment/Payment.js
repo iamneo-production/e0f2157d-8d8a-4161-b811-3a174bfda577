@@ -37,21 +37,19 @@ const Payment = () => {
 
     const handlePaymentSuccess = (payment) => {
         console.log("Payment successful:", payment);
-        // Handle success action here
+      
     };
 
     const handlePaymentFailure = (error) => {
         console.log('Payment failed:', error);
-        // Handle failure action here
+    
     };
 
-    // Function to handle the server-side payment
+
     const handlePaymentOnServer = async (amount) => {
-        // Here you can make the API call to your server to handle the payment amount
+       
         console.log("Sending to server: ",amount);
-        // Example API call:
-        // const response = await apiCallToServer({ amount });
-        // console.log(response);
+        
     };
 
     return (
