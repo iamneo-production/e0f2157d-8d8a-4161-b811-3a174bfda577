@@ -6,8 +6,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
-import com.examly.springapp.model.Payment;
-import com.examly.springapp.service.PaymentService;
+import com.examly.springapp.model.Payments;
+import com.examly.springapp.service.PaymentsService;
 
 import java.util.List;
 import java.util.Optional;
@@ -15,44 +15,44 @@ import java.util.Optional;
 @RestController
 @CrossOrigin("*")
 @RequestMapping("/api/bookings")
-public class PaymentController {
+public class PaymentsController {
 
-    private final PaymentService paymentService;
+    private final PaymentsService paymentService;
 
     @Autowired
-    public PaymentController(PaymentService paymentService) {
+    public PaymentsController(PaymentsService paymentService) {
         this.paymentService = paymentService;
     }
 
     @PreAuthorize("hasRole('USER')")
     @PostMapping("/payments")
-    public ResponseEntity<Payment> createPayment(@RequestBody Payment payment) {
-        Payment createdPayment = paymentService.createPayment(payment);
+    public ResponseEntity<Payments> createPayment(@RequestBody Payments payment) {
+        Payments createdPayment = paymentService.createPayment(payment);
         return new ResponseEntity<>(createdPayment, HttpStatus.CREATED);
     }
 
     @PreAuthorize("hasRole('USER')")
     @GetMapping("/{paymentId}")
-    public ResponseEntity<Payment> getPaymentById(@PathVariable int paymentId) {
-        Optional<Payment> payment = paymentService.getPaymentById(paymentId);
+    public ResponseEntity<Payments> getPaymentById(@PathVariable int paymentId) {
+        Optional<Payments> payment = paymentService.getPaymentById(paymentId);
         return payment.map(value -> new ResponseEntity<>(value, HttpStatus.OK))
                 .orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 
     @PreAuthorize("hasRole('USER')")
     @GetMapping
-    public ResponseEntity<List<Payment>> getAllPayments() {
-        List<Payment> payments = paymentService.getAllPayments();
+    public ResponseEntity<List<Payments>> getAllPayments() {
+        List<Payments> payments = paymentService.getAllPayments();
         return new ResponseEntity<>(payments, HttpStatus.OK);
     }
 
     @PreAuthorize("hasRole('USER')")
     @PutMapping("/{paymentId}")
-    public ResponseEntity<Payment> updatePayment(@PathVariable int paymentId, @RequestBody Payment payment) {
-        Optional<Payment> existingPayment = paymentService.getPaymentById(paymentId);
+    public ResponseEntity<Payments> updatePayment(@PathVariable int paymentId, @RequestBody Payments payment) {
+        Optional<Payments> existingPayment = paymentService.getPaymentById(paymentId);
         if (existingPayment.isPresent()) {
             payment.setPaymentId(paymentId);
-            Payment updatedPayment = paymentService.updatePayment(payment);
+            Payments updatedPayment = paymentService.updatePayment(payment);
             return new ResponseEntity<>(updatedPayment, HttpStatus.OK);
         } else {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
@@ -62,7 +62,7 @@ public class PaymentController {
     @PreAuthorize("hasRole('USER')")
     @DeleteMapping("/{paymentId}")
     public ResponseEntity<Void> deletePayment(@PathVariable int paymentId) {
-        Optional<Payment> existingPayment = paymentService.getPaymentById(paymentId);
+        Optional<Payments> existingPayment = paymentService.getPaymentById(paymentId);
         if (existingPayment.isPresent()) {
             paymentService.deletePayment(paymentId);
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);

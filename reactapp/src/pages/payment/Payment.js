@@ -37,17 +37,17 @@ const Payment = () => {
 
     const handlePaymentSuccess = (payment) => {
         console.log("Payment successful:", payment);
-        
+      
     };
 
     const handlePaymentFailure = (error) => {
         console.log('Payment failed:', error);
-        
+    
     };
 
-    
+
     const handlePaymentOnServer = async (amount) => {
-        
+       
         console.log("Sending to server: ",amount);
         
     };
