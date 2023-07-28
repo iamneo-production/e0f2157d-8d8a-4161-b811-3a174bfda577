@@ -20,7 +20,7 @@ const AuthProvider = ({ children }) => {
             const response = await registerUser(userData);
             console.log("User registered successfully!", response);
 
-            // Redirect to the login page after successful registration
+         
             navigate("/login");
         } catch (error) {
             console.error("Registration failed!", error);

@@ -5,8 +5,8 @@ import java.time.LocalDateTime;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "Payment")
-public class Payment {
+@Table(name = "payments")
+public class Payments {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int paymentId;
