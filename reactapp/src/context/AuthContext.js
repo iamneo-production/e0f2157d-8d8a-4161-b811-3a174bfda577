@@ -22,6 +22,7 @@ const AuthProvider = ({ children }) => {
 
          
             navigate("/login");
+            console.log("Navigate to login")
         } catch (error) {
             console.error("Registration failed!", error);
 
