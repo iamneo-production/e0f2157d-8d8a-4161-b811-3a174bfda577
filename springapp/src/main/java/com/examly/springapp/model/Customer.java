@@ -1,13 +1,11 @@
 package com.examly.springapp.model;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.Id;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.OneToOne;
-
-import com.fasterxml.jackson.annotation.JsonBackReference;
+import javax.persistence.OneToMany;
+import java.util.List;
 
 @Entity
 public class Customer {
@@ -17,19 +15,18 @@ public class Customer {
     private String name;
     private String email;
     private String phone;
+    @OneToMany(mappedBy="customer")
+    private List<Booking> bookings;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JsonBackReference
-    private Booking booking;
+    public Customer() {
+        // Default constructor
+    }
 
     public Customer(int customerId, String name, String email, String phone) {
         this.customerId = customerId;
         this.name = name;
         this.email = email;
         this.phone = phone;
-    }
-
-    public Customer() {
     }
 
     public int getCustomerId() {
@@ -63,5 +60,4 @@ public class Customer {
     public void setPhone(String phone) {
         this.phone = phone;
     }
-
 }

@@ -1,14 +1,11 @@
 package com.examly.springapp.model;
 
 import javax.persistence.Entity;
+import javax.persistence.Id;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-
-import com.fasterxml.jackson.annotation.JsonBackReference;
-
+import javax.persistence.OneToMany;
+import java.util.List;
 @Entity
 public class Room {
     @Id
@@ -18,12 +15,12 @@ public class Room {
     private int capacity;
     private boolean isAvailable;
     private double pricePerNight;
-    @ManyToOne
-    @JoinColumn(name = "booking_id")
-    @JsonBackReference
-    private Booking booking;
+    @OneToMany(mappedBy="customer")
+    private List<Booking> bookings;
+
 
     public Room() {
+        // Default constructor
     }
 
     public Room(int roomId, String roomType, int capacity, boolean isAvailable, double pricePerNight) {
@@ -32,14 +29,6 @@ public class Room {
         this.capacity = capacity;
         this.isAvailable = isAvailable;
         this.pricePerNight = pricePerNight;
-    }
-
-    public Booking getBooking() {
-        return booking;
-    }
-
-    public void setBooking(Booking booking) {
-        this.booking = booking;
     }
 
     public int getRoomId() {
@@ -70,8 +59,8 @@ public class Room {
         return isAvailable;
     }
 
-    public void setAvailable(boolean isAvailable) {
-        this.isAvailable = isAvailable;
+    public void setAvailable(boolean available) {
+        isAvailable = available;
     }
 
     public double getPricePerNight() {
@@ -81,5 +70,4 @@ public class Room {
     public void setPricePerNight(double pricePerNight) {
         this.pricePerNight = pricePerNight;
     }
-
 }
