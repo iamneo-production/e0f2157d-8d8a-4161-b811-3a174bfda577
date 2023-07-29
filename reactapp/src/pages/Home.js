@@ -13,17 +13,21 @@ const Home = () => {
     const [roomTypeFilter, setRoomTypeFilter] = useState('');
     const [locationFilter, setLocationFilter] = useState('');
     console.log(user)
-    useEffect(() => {
-        fetchRooms();
-    }, [roomTypeFilter, locationFilter]);
+    
 
     const fetchRooms = async () => {
         try {
             let roomsData;
             if (roomTypeFilter && locationFilter) {
                 roomsData = await getFilteredRooms({ roomType: roomTypeFilter, location: locationFilter });
+                console.log(roomTypeFilter,locationFilter)
+                console.log(roomsData)
+                console.log(rooms)
             } else {
                 roomsData = await getAllRooms();
+                console.log(roomTypeFilter,locationFilter)
+                console.log(roomsData)
+                console.log(rooms)
             }
             setRooms(roomsData);
             setLoading(false);
@@ -34,14 +38,18 @@ const Home = () => {
     };
 
 
-
+    useEffect(() => {
+        console.log(roomTypeFilter)
+        console.log(locationFilter)
+        fetchRooms();
+    }, [roomTypeFilter, locationFilter]);
     if (!authToken) {
         return (
             <div>
                 <p>Not Authenticated</p>
                 <Navigate to="/" />
             </div>
-        ); // Render nothing while redirecting
+        ); 
     }
 
     return (
@@ -51,15 +59,16 @@ const Home = () => {
                 <Flex align="center">
                     <Box mr={2}>
                         <Select
-                            placeholder="Select Room Type"
+                            
                             value={roomTypeFilter}
                             onChange={(e) => setRoomTypeFilter(e.target.value)}
                         >
-                            <option value="Single Room">Single</option>
-                            <option value="Double Room">Double</option>
-                            <option value="Suite Room">Suite</option>
-                            <option value="Twin Room">Twin</option>
-                            <option value="Delux Room">Delux</option>
+                            <option value="" disabled>Room Type</option>
+                            <option value="Single Room">Single Room</option>
+                            <option value="Double Room">Double Room</option>
+                            <option value="Deluxe Room">Deluxe Room</option>
+                            <option value="Twin Room">Twin Room</option>
+                            <option value="Suite Room">Suite Room</option>
                         </Select>
                     </Box>
                     <Box>
@@ -78,7 +87,7 @@ const Home = () => {
                     <CircularProgress isIndeterminate color="teal" />
                 </Box>
             ) : (
-                <List rooms={rooms} />
+                <List rooms={rooms} key={rooms.length}/>
             )}
         </Box>
     );

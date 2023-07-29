@@ -25,18 +25,18 @@ const BookingForm = () => {
         customerContact: user.phone,
         fromDate: "",
         toDate: "",
-        totalDay: 0, // Initialize totalDay as 0
-        totalAmount: 0, // Initialize totalAmount as 0
+        totalDay: 0, 
+        totalAmount: 0, 
     });
 
     useEffect(() => {
-        // Calculate totalDay and totalAmount when fromDate or toDate changes
+        
         const fromDate = new Date(bookingData.fromDate);
         const toDate = new Date(bookingData.toDate);
         const timeDifference = toDate.getTime() - fromDate.getTime();
         const totalDay = Math.ceil(timeDifference / (1000 * 3600 * 24));
 
-        // Calculate totalAmount based on totalDay and selected room's cost
+   
         const totalAmount = totalDay * selectedRoom.cost;
 
         setBookingData({ ...bookingData, totalDay, totalAmount });
@@ -46,12 +46,12 @@ const BookingForm = () => {
         e.preventDefault();
 
         try {
-            // Make a POST request to the backend to book the room
+           
             const response = await addBooking(bookingData);
 
-            // Check if the booking was successful
+       
             if (response) {
-                // Update the state to indicate the booked room
+             
                 console.log("Room booked successfully!");
                 navigate("/payment", { state: { roomAmount: bookingData.totalAmount, idRoom: selectedRoom, bookingData } });
             } else {
@@ -110,7 +110,7 @@ const BookingForm = () => {
                     <Input
                         type="number"
                         value={bookingData.totalDay}
-                        readOnly // Make the input field read-only
+                        readOnly 
                     />
                 </FormControl>
                 <FormControl id="totalAmount" mb={4} isRequired>
@@ -118,7 +118,7 @@ const BookingForm = () => {
                     <Input
                         type="number"
                         value={bookingData.totalAmount}
-                        readOnly // Make the input field read-only
+                        readOnly 
                     />
                 </FormControl>
                 <Button type="submit" colorScheme="blue">
