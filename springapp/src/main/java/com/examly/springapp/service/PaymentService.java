@@ -1,17 +1,18 @@
 package com.examly.springapp.service;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import com.examly.springapp.model.Payment;
+
 import org.springframework.stereotype.Service;
 
-import com.examly.springapp.model.Payment;
-import com.examly.springapp.repository.PaymentRepo;
+import java.util.List;
 
 @Service
-public class PaymentService {
-    @Autowired
-    private PaymentRepo paymentRepo;
+public interface PaymentService {
+    List<Payment> getAllPaymentsForBooking(int bookingId);
 
-    public Payment addPayment(Payment payment) {
-        return paymentRepo.save(payment);
-    }
+    Payment createPaymentForBooking(int bookingId, Payment payment);
+
+    Payment updatePaymentForBooking(int bookingId, int paymentId, Payment payment);
+
+    void deletePaymentForBooking(int bookingId, int paymentId);
 }

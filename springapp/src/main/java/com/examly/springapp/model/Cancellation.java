@@ -1,7 +1,5 @@
 package com.examly.springapp.model;
 
-import java.util.Date;
-
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -9,9 +7,9 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-
+import java.util.Date;
 @Entity
+
 public class Cancellation {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -19,19 +17,10 @@ public class Cancellation {
     private Date dateCancelled;
     private String reason;
     @ManyToOne
-    @JoinColumn(name = "booking_id")
-    @JsonBackReference
+    @JoinColumn(name="booking_id")
     private Booking booking;
-
-    public Booking getBooking() {
-        return booking;
-    }
-
-    public void setBooking(Booking booking) {
-        this.booking = booking;
-    }
-
     public Cancellation() {
+        // Default constructor
     }
 
     public Cancellation(int cancellationId, Date dateCancelled, String reason) {
@@ -63,5 +52,4 @@ public class Cancellation {
     public void setReason(String reason) {
         this.reason = reason;
     }
-
 }

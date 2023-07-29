@@ -1,16 +1,15 @@
 package com.examly.springapp.model;
 
-import java.time.LocalDateTime;
-
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+
+import java.time.*;
 @Entity
 public class Payment {
     @Id
@@ -20,16 +19,11 @@ public class Payment {
     private LocalDateTime paymentDateTime;
     private String paymentStatus;
     @ManyToOne
-    @JoinColumn(name = "booking_id")
-    @JsonBackReference
+    @JoinColumn(name="booking_id")
     private Booking booking;
 
-    public Booking getBooking() {
-        return booking;
-    }
-
-    public void setBooking(Booking booking) {
-        this.booking = booking;
+    public Payment() {
+        // Default constructor
     }
 
     public Payment(int paymentId, double amount, LocalDateTime paymentDateTime, String paymentStatus) {
@@ -37,9 +31,6 @@ public class Payment {
         this.amount = amount;
         this.paymentDateTime = paymentDateTime;
         this.paymentStatus = paymentStatus;
-    }
-
-    public Payment() {
     }
 
     public int getPaymentId() {
@@ -73,5 +64,4 @@ public class Payment {
     public void setPaymentStatus(String paymentStatus) {
         this.paymentStatus = paymentStatus;
     }
-
 }
