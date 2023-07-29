@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const BASE_URL = "https://8080-abafebdafeeaffecacabeacbecdaeaeaadbdbabf.project.examly.io"; 
+const BASE_URL = "https://8080-aeeedfdecebcefecacabeacbecdafbfbfaeedd.project.examly.io"; 
 const getToken = () => {
     return localStorage.getItem("token");
 };
