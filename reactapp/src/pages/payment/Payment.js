@@ -1,21 +1,19 @@
-
-
 import React, { useState, useContext } from 'react';
-
 import RazorpayButton from './RazorPayButton';
 import './payment.css';
 import { Link, useLocation } from 'react-router-dom';
 import { AuthContext } from '../../context/AuthContext';
-import BookingConfirmation from '../BookingConfirmation';
 
 const Payment = () => {
-    const location = useLocation()
-    const { roomAmount, idRoom, bookingData } = location.state
-    const [email, setEmail] = useState('');
-    const [phoneNumber, setPhoneNumber] = useState('');
+    const location = useLocation();
+    const { roomAmount, idRoom, bookingData } = location.state;
+    const { user } = useContext(AuthContext);
+    const [email, setEmail] = useState(user.email);
+    const [phoneNumber, setPhoneNumber] = useState(user.phone);
     const [hotelId, setHotelId] = useState(idRoom.id);
-    const [amount, setAmount] = useState(roomAmount);
-    const { user } = useContext(AuthContext)
+    const [amount, setAmount] = useState(roomAmount); 
+    const [originalAmount, setOriginalAmount] = useState(roomAmount); 
+     
 
     const handleInputChange = (e) => {
         const { name, value } = e.target;
@@ -32,7 +30,6 @@ const Payment = () => {
                 break;
             case 'amount':
                 setAmount(value);
-                break;
             default:
                 break;
         }
@@ -40,14 +37,19 @@ const Payment = () => {
 
     const handlePaymentSuccess = (payment) => {
         console.log("Payment successful:", payment);
-
-
-
+      
     };
 
     const handlePaymentFailure = (error) => {
         console.log('Payment failed:', error);
+    
+    };
 
+
+    const handlePaymentOnServer = async (amount) => {
+       
+        console.log("Sending to server: ",amount);
+        
     };
 
     return (
@@ -59,7 +61,7 @@ const Payment = () => {
                     type="email"
                     id="email"
                     name="email"
-                    value={user.email}
+                    value={email}
                     onChange={handleInputChange}
                     placeholder="Email"
                 />
@@ -68,7 +70,7 @@ const Payment = () => {
                     type="tel"
                     id="phoneNumber"
                     name="phoneNumber"
-                    value={user.phone}
+                    value={phoneNumber}
                     onChange={handleInputChange}
                     placeholder="Phone Number"
                 />
@@ -97,16 +99,19 @@ const Payment = () => {
                 <p>Payment Amount: {amount} INR</p>
             </div>
             <RazorpayButton
-                amount={amount * 100} // Convert amount to paise
-                currency="INR" // Replace with the actual currency code
+                amount={amount * 100} 
+                currency="INR"
                 email={email}
                 phoneNumber={phoneNumber}
                 hotelId={hotelId}
                 onSuccess={handlePaymentSuccess}
                 onFailure={handlePaymentFailure}
+                onServerPayment={handlePaymentOnServer} 
+                originalAmount = {originalAmount}
             />
 
             <button><Link to="/home">Go back</Link></button>
+            <button><Link to={"/all-payments"}>All Payments</Link></button>
         </div>
     );
 };

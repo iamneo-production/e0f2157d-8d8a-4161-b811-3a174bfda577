@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const BASE_URL = "http://localhost:8080"; 
+const BASE_URL = "https://8080-abafebdafeeaffecacabeacbecdaeaeaadbdbabf.project.examly.io"; 
 const getToken = () => {
     return localStorage.getItem("token");
 };
@@ -58,7 +58,7 @@ export const deleteRoom = async (id) => {
 
 export const updateRoom = async (id, room) => {
     try {
-        const response = axiosInstance.put(`http://localhost:8080/rooms/update/${id}`, room);
+        const response = axiosInstance.put(`/rooms/update/${id}`, room);
         return response.data;
     } catch (error) {
         throw error.response.data;
@@ -66,7 +66,7 @@ export const updateRoom = async (id, room) => {
 };
 export const getSingleRoom = async (id) => {
     try {
-        const response = await axiosInstance.get(`http://localhost:8080/rooms/emp/${id}`);
+        const response = await axiosInstance.get(`/rooms/emp/${id}`);
         return response.data;
     } catch (error) {
         throw error.response.data;
