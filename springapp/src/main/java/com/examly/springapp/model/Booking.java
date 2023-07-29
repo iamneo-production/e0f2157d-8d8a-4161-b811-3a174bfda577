@@ -5,39 +5,44 @@ import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
-
-import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-
 @Entity
 public class Booking {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    @JsonFormat(pattern = "yy-MM-dd", shape = JsonFormat.Shape.STRING)
     private Date checkInDate;
-    @JsonFormat(pattern = "yy-MM-dd", shape = JsonFormat.Shape.STRING)
     private Date checkOutDate;
-    @OneToOne(mappedBy = "booking", cascade = CascadeType.ALL)
-    @JsonManagedReference
+    @ManyToOne
+    @JoinColumn(name = "room_id")
+    private Room room;
+    @ManyToOne
+    @JoinColumn(name = "customer_id")
     private Customer customer;
+    @OneToMany(mappedBy = "booking",cascade = CascadeType.ALL)
+    private List<Payment> payments;
+    @OneToMany(mappedBy = "booking",cascade = CascadeType.ALL)
+    private List<Cancellation> cancellations;
 
-    @OneToMany(mappedBy = "booking", cascade = CascadeType.ALL)
-    @JsonManagedReference
-    private List<Room> room;
+    public Booking() {
+        // Default constructor
+    }
 
-    @OneToMany(mappedBy = "booking", cascade = CascadeType.ALL)
-    @JsonManagedReference
-    private List<Payment> payment;
-
-    @OneToMany(mappedBy = "booking", cascade = CascadeType.ALL)
-    @JsonManagedReference
-    private List<Cancellation> cancellation;
+    public Booking(int id, Date checkInDate, Date checkOutDate, Room room, Customer customer,
+                   List<Payment> payments, List<Cancellation> cancellations) {
+        this.id = id;
+        this.checkInDate = checkInDate;
+        this.checkOutDate = checkOutDate;
+        this.room = room;
+        this.customer = customer;
+        this.payments = payments;
+        this.cancellations = cancellations;
+    }
 
     public int getId() {
         return id;
@@ -63,6 +68,14 @@ public class Booking {
         this.checkOutDate = checkOutDate;
     }
 
+    public Room getRoom() {
+        return room;
+    }
+
+    public void setRoom(Room room) {
+        this.room = room;
+    }
+
     public Customer getCustomer() {
         return customer;
     }
@@ -71,28 +84,19 @@ public class Booking {
         this.customer = customer;
     }
 
-    public List<Room> getRoom() {
-        return room;
+    public List<Payment> getPayments() {
+        return payments;
     }
 
-    public void setRoom(List<Room> room) {
-        this.room = room;
+    public void setPayments(List<Payment> payments) {
+        this.payments = payments;
     }
 
-    public List<Payment> getPayment() {
-        return payment;
+    public List<Cancellation> getCancellations() {
+        return cancellations;
     }
 
-    public void setPayment(List<Payment> payment) {
-        this.payment = payment;
+    public void setCancellations(List<Cancellation> cancellations) {
+        this.cancellations = cancellations;
     }
-
-    public List<Cancellation> getCancellation() {
-        return cancellation;
-    }
-
-    public void setCancellation(List<Cancellation> cancellation) {
-        this.cancellation = cancellation;
-    }
-
 }
