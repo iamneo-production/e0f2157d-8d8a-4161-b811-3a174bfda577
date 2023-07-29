@@ -20,36 +20,7 @@ const Login = () => {
         setFormData({ ...formData, [e.target.name]: e.target.value });
     };
 
-    // const handleSubmit = async (e) => {
-    //     e.preventDefault();
-    //     setError(null);
-    //     setLoading(true);
-    //     try {
-    //         const response = await loginUser(formData);
-    //         localStorage.setItem("token", response.token);
-    //         setAuthToken(response.token);
-    //         console.log(response)
-
-    //         // Check if the user has ROLE_ADMIN authority
-    //         const isAdmin = response.authorities.some((authority) => authority.authority === "ROLE_ADMIN");
-
-    //         if (isAdmin) {
-    //             // For admin users, update the user state with isAdmin: true
-    //             setUser({ ...response.user, isAdmin: true });
-    //             setLoading(false);
-    //             navigate("/addroom"); // Navigate to the addroom page for admin
-    //         } else {
-    //             // For non-admin users, update the user state without isAdmin: true
-    //             setUser(response.user);
-    //             setLoading(false);
-    //             navigate("/home"); // Navigate to the home page for non-admin users
-    //         }
-    //     } catch (error) {
-    //         console.error("Login failed!", error);
-    //         setLoading(false);
-    //         setError("Login failed. Please try again.");
-    //     }
-    // };
+   
 
     const handleSubmit = async (e) => {
         e.preventDefault()
